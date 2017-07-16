@@ -1,0 +1,97 @@
+<!Doctype html>
+<html>
+<head>
+<meta charset='utf-8' />
+	 <link rel = 'stylesheet' href='./css/jquery-ui.min.css'>	
+<!-- <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link> -->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!-- <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script> -->
+
+<!-- The Ui Js was missing  -->
+<!-- Write now checking the autocomplete plugin -->
+<style>
+div.inputI {
+	display:flex;
+	flex-direction: column;
+	width: 30vw;
+	padding-left:30vw;
+	padding-top:30vh;
+}
+input{
+	margin-top:5vh;
+	height: 7vh;
+	border-top: 1vh;
+}
+select{
+	margin-top:5vh;
+	height:7vh;
+}
+
+/*I have done similar API with weather using Node JS . I will show you that . */
+
+
+
+</style>
+</head>
+
+<!-- Going to check how I did it in my previous work  -->
+<body>
+
+<div class = 'inputI'>
+<input type = 'text' id='inputC' placeholder ='Country Name' />
+<select>
+
+</select>
+	
+</div>
+</body>
+<!-- Write now fetching the values just as autocomplete  -->
+
+<script type='text/javascript'>
+$(function(){
+
+
+	$('#inputC').on('keyup',function(){
+		// input Change was working i.e when i am switching to the dropdown 
+		var that = this;
+		var x = $(that).val();
+		// console.log(x);
+
+		// console.log('The value is ' + x);
+		
+
+		url =  "https://restcountries.eu/rest/v2/name/"+ x;
+		
+		if(x.length>0){
+		$.getJSON( url, function(data) {
+			// console.log(data);
+			$('select').empty();
+			data.forEach(function(element){
+				
+
+
+				$('select').append('<option>'+element.name+'</option>');
+
+			});
+        // We can't use .return because return is a JavaScript keyword.
+        
+    }).error(function(){
+    	// alert('error');
+
+    });
+	}
+	});
+
+
+ // There is some problem in on 'KeyUp'
+	// Checking if AutoComplete is working or not
+
+
+});
+//Next is to Fetch the weather API 
+
+</script>
+
+</html>
